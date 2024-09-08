@@ -538,8 +538,8 @@ class Skytils {
     fun onConnect(event: FMLNetworkEvent.ClientConnectedToServerEvent) {
         Utils.lastNHPC = event.handler as? NetHandlerPlayClient
         Utils.isOnHypixel = mc.runCatching {
-            !event.isLocal && (thePlayer?.clientBrand?.lowercase()?.contains("hypixel")
-                ?: currentServerData?.serverIP?.lowercase()?.contains("hypixel") ?: false)
+            !event.isLocal && (thePlayer?.clientBrand?.lowercase()?.contains("fakepixel")
+                ?: currentServerData?.serverIP?.lowercase()?.contains("fakepixel") ?: false)
         }.onFailure { it.printStackTrace() }.getOrDefault(false)
 
         IO.launch {
@@ -577,7 +577,7 @@ class Skytils {
         }
         if (!Utils.isOnHypixel && event.packet is S3FPacketCustomPayload && event.packet.channelName == "MC|Brand") {
             val brand = event.packet.bufferData.readStringFromBuffer(Short.MAX_VALUE.toInt())
-            if (brand.lowercase().contains("hypixel")) {
+            if (brand.lowercase().contains("fakepixel")) {
                 Utils.isOnHypixel = true
             }
         }
