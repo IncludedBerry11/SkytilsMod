@@ -98,6 +98,9 @@ import net.minecraft.inventory.ContainerChest
 import net.minecraft.launchwrapper.Launch
 import net.minecraft.network.play.client.C01PacketChatMessage
 import net.minecraft.network.play.server.*
+import net.minecraft.scoreboard.ScoreObjective
+import net.minecraft.scoreboard.Scoreboard
+import net.minecraft.util.EnumChatFormatting
 import net.minecraftforge.client.ClientCommandHandler
 import net.minecraftforge.client.event.GuiOpenEvent
 import net.minecraftforge.client.event.GuiScreenEvent
@@ -537,17 +540,10 @@ class Skytils {
     @SubscribeEvent
     fun onConnect(event: FMLNetworkEvent.ClientConnectedToServerEvent) {
         Utils.lastNHPC = event.handler as? NetHandlerPlayClient
-        Utils.isOnHypixel = mc.runCatching {
-            !event.isLocal && (thePlayer?.clientBrand?.lowercase()?.contains("fakepixel")
-                ?: currentServerData?.serverIP?.lowercase()?.contains("fakepixel") ?: false)
-        }.onFailure { it.printStackTrace() }.getOrDefault(false)
+        Utils.isOnHypixel = mc.thePlayer.getClientBrand().toLowerCase(Locale.ROOT).contains("fakepixel")
 
         IO.launch {
             TrophyFish.loadFromApi()
-        }
-
-        IO.launch {
-            WSClient.openConnection()
         }
     }
 
@@ -563,7 +559,15 @@ class Skytils {
             Utils.dungeons = false
         }
         if (!Utils.inSkyblock && Utils.isOnHypixel && event.packet is S3DPacketDisplayScoreboard && event.packet.func_149371_c() == 1) {
-            Utils.skyblock = event.packet.func_149370_d() == "SBScoreboard"
+            Scoreboard scoreboard = mc.theWorld.getScoreboard();
+			ScoreObjective sidebar = scoreboard.getObjectiveInDisplaySlot(1);
+            if (sidebar != null) {
+                if (EnumChatFormatting.getTextWithoutFormattingCodes(sidebar.getDisplayName()).contains("SKYBLOCK")) {
+						    Utils.skyblock = true;
+									return;
+								}
+		  		}
+            Utils.skyblock = false
             printDevMessage("score ${event.packet.func_149370_d()}", "utils")
             printDevMessage("sb ${Utils.inSkyblock}", "utils")
         }
