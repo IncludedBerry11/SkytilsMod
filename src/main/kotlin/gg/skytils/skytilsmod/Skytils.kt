@@ -523,7 +523,6 @@ class Skytils {
     init {
         tickTimer(20, repeats = true) {
             if (mc.thePlayer != null) {
-                if (deobfEnvironment) {
                 if (Skytils.config.forcehp) Utils.isOnHypixel = true
                 if (Skytils.config.forcesb) {
                     Utils.skyblock = true
