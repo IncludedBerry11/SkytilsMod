@@ -243,14 +243,34 @@ object Config : Vigilant(
     var updateChannel = 2
 
     @Property(
-        type = PropertyType.SWITCH, name = "Inject Fake Dungeon Map",
-        description = "Injects a fake Magical Map into your hotbar to make old mods work again!\nP.S.: Use Catlas!",
-        category = "Dungeons", subcategory = "Fixes",
-        i18nName = "skytils.config.dungeons.fixes.inject_fake_dungeon_map",
+        type = PropertyType.SWITCH, name = "Force Hypixel",
+        description = "Sets hypixel detector to detect that you are on hypixel even when you are not.",
+        category = "Dungeons", subcategory = "Miscellaneous",
+        i18nName = "skytils.config.dungeons.miscellaneous.forcehp",
         i18nCategory = "skytils.config.dungeons",
-        i18nSubcategory = "skytils.config.dungeons.fixes"
+        i18nSubcategory = "skytils.config.dungeons.miscellaneous"
     )
-    var injectFakeDungeonMap = false
+    var forcehp = false
+
+    @Property(
+        type = PropertyType.SWITCH, name = "Force Skyblock",
+        description = "Sets skyblock detector to detect that you are on skyblock even when you are not.",
+        category = "Dungeons", subcategory = "Miscellaneous",
+        i18nName = "skytils.config.dungeons.miscellaneous.forcesb",
+        i18nCategory = "skytils.config.dungeons",
+        i18nSubcategory = "skytils.config.dungeons.miscellaneous"
+    )
+    var forcesb = false
+    
+    @Property(
+        type = PropertyType.SWITCH, name = "Force Dungeons",
+        description = "Sets dungeons detector to detect that you are on dungeons even when you are not.",
+        category = "Dungeons", subcategory = "Miscellaneous",
+        i18nName = "skytils.config.dungeons.miscellaneous.forcedungeons",
+        i18nCategory = "skytils.config.dungeons",
+        i18nSubcategory = "skytils.config.dungeons.miscellaneous"
+    )
+    var forcedungeons = false
 
     @Property(
         type = PropertyType.SWITCH, name = "Dungeon Crypts Counter",
