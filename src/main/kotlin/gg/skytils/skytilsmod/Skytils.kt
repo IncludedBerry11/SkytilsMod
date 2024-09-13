@@ -98,9 +98,6 @@ import net.minecraft.inventory.ContainerChest
 import net.minecraft.launchwrapper.Launch
 import net.minecraft.network.play.client.C01PacketChatMessage
 import net.minecraft.network.play.server.*
-import net.minecraft.scoreboard.ScoreObjective
-import net.minecraft.scoreboard.Scoreboard
-import net.minecraft.util.EnumChatFormatting
 import net.minecraftforge.client.ClientCommandHandler
 import net.minecraftforge.client.event.GuiOpenEvent
 import net.minecraftforge.client.event.GuiScreenEvent
@@ -557,20 +554,7 @@ class Skytils {
         if (event.packet is S01PacketJoinGame) {
             Utils.skyblock = false
             Utils.dungeons = false
-        }
-        if (!Utils.inSkyblock && Utils.isOnHypixel && event.packet is S3DPacketDisplayScoreboard && event.packet.func_149371_c() == 1) {
-            Scoreboard scoreboard = mc.theWorld.getScoreboard();
-			ScoreObjective sidebar = scoreboard.getObjectiveInDisplaySlot(1);
-            if (sidebar != null) {
-                if (EnumChatFormatting.getTextWithoutFormattingCodes(sidebar.getDisplayName()).contains("SKYBLOCK")) {
-						    Utils.skyblock = true;
-									return;
-								}
-		  		}
-            Utils.skyblock = false
-            printDevMessage("score ${event.packet.func_149370_d()}", "utils")
-            printDevMessage("sb ${Utils.inSkyblock}", "utils")
-        }
+	}
         if (event.packet is S1CPacketEntityMetadata && mc.thePlayer != null) {
             val nameObj = event.packet.func_149376_c()?.find { it.dataValueId == 2 } ?: return
             val entity = mc.theWorld.getEntityByID(event.packet.entityId)
