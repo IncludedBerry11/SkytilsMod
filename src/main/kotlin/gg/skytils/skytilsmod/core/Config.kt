@@ -273,6 +273,16 @@ object Config : Vigilant(
     var forcedungeons = false
 
     @Property(
+        type = PropertyType.SWITCH, name = "Inject Fake Dungeon Map",
+        description = "Injects a fake Magical Map into your hotbar to make old mods work again!\nP.S.: Use Catlas!",
+        category = "Dungeons", subcategory = "Fixes",
+        i18nName = "skytils.config.dungeons.fixes.inject_fake_dungeon_map",
+        i18nCategory = "skytils.config.dungeons",
+        i18nSubcategory = "skytils.config.dungeons.fixes"
+    )
+    var injectFakeDungeonMap = false
+
+    @Property(
         type = PropertyType.SWITCH, name = "Dungeon Crypts Counter",
         description = "Shows the amount of crypts destroyed on your HUD.",
         category = "Dungeons", subcategory = "HUD",
