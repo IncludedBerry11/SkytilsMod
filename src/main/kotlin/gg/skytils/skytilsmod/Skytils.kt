@@ -537,7 +537,9 @@ class Skytils {
     @SubscribeEvent
     fun onConnect(event: FMLNetworkEvent.ClientConnectedToServerEvent) {
         Utils.lastNHPC = event.handler as? NetHandlerPlayClient
+        if (mc != null && mc.thePlayer != null && mc.thePlayer.getClientBrand() != null) {
         Utils.isOnHypixel = mc.thePlayer.getClientBrand().toLowerCase(Locale.ROOT).contains("fakepixel")
+        }
 
         IO.launch {
             TrophyFish.loadFromApi()
