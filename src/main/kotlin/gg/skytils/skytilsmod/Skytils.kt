@@ -524,14 +524,8 @@ class Skytils {
         tickTimer(20, repeats = true) {
             if (mc.thePlayer != null) {
                 if (Skytils.config.forcehp) Utils.isOnHypixel = true
-                if (Skytils.config.forcesb) {
-                    Utils.skyblock = true
-                    Utils.inSkyblock = true
-                }
-                if (Skytils.config.forcedungeons) {
-                    Utils.dungeons = true
-                    Utils.inDungeons = true
-                }
+                if (Skytils.config.forcesb) Utils.skyblock = true
+                if (Skytils.config.forcedungeons) Utils.dungeons = true
                 if (DevTools.getToggle("sprint"))
                     KeyBinding.setKeyBindState(mc.gameSettings.keyBindSprint.keyCode, true)
             }
@@ -542,7 +536,7 @@ class Skytils {
     fun onConnect(event: FMLNetworkEvent.ClientConnectedToServerEvent) {
         Utils.lastNHPC = event.handler as? NetHandlerPlayClient
         if (mc != null && mc.thePlayer != null && mc.thePlayer.getClientBrand() != null) {
-        Utils.isOnHypixel = mc.thePlayer.getClientBrand().toLowerCase(Locale.ROOT).contains("fakepixel")
+            Utils.isOnHypixel = mc.thePlayer.getClientBrand().toLowerCase(Locale.ROOT).contains("fakepixel")
         }
 
         IO.launch {
